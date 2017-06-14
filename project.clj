@@ -1,4 +1,4 @@
-(defproject dm3/durable-queue "1.0.0-SNAPSHOT"
+(defproject dm3/durable-queue "1.0.0"
   :description "An in-process task-queue that is backed by disk."
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
