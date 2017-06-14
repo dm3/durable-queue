@@ -5,7 +5,7 @@ This library implements a disk-backed task queue, allowing for queues that can s
 ### usage
 
 ```clj
-[factual/durable-queue "0.1.5"]
+[dm3/durable-queue "1.0.0"]
 ```
 
 To interact with queues, first create a `queues` object by specifying a directory in the filesystem and an options map:
@@ -90,6 +90,6 @@ Writes can be batched using `fsync-threshold` and/or `fsync-interval`, or by exp
 
 ### license
 
-Copyright © 2015 Factual Inc
+Copyright © 2015 Factual Inc, Vadim Platonov
 
 Distributed under the Eclipse Public License 1.0
