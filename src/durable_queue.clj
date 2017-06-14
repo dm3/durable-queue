@@ -343,12 +343,14 @@
     (unmap slab)
     (.delete (io/file (.filename slab)))))
 
+(def ^:private slab-suffix-re-str+ "_(\\d{6}$)")
+
 (defn- create-slab
   "Creates a new slab file, ensuring a new file name that is lexicographically greater than
    any existing files for that queue name."
   ([directory q-name queue size]
      (locking fs-monitor
-       (let [pattern (re-pattern (str "^" q-name "_(\\d+)"))
+       (let [pattern (re-pattern (str "^" q-name slab-suffix-re-str+))
              last-number (->> directory
                            io/file
                            .listFiles
@@ -398,8 +400,8 @@
   (let [queue->file (->> directory
                       io/file
                       .listFiles
-                      (filter #(re-find #"\w+_\d+" (.getName ^File %)))
-                      (group-by #(second (re-find #"(\w+)_\d+" (.getName ^File %)))))]
+                      (filter #(re-find #"^\S+_\d{6}+$" (.getName ^File %)))
+                      (group-by #(second (re-find #"^(\S+)_\d{6}+$" (.getName ^File %)))))]
     (zipmap
       (keys queue->file)
       (map
